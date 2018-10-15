@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+coverage = "*"
+flake8_assertive = "*"
+flake8_bugbear = "*"
+flake8_builtins = "*"
+flake8_tuple = "*"
+freezegun = "*"
+mypy = "*"
+pytest = "*"
+pytest-cov = "*"
+requests = "*"
+responses = "*"
+testfixtures = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
