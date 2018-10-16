@@ -24,7 +24,6 @@ def test_blue():
 
 
 """ Scenario:
-$ pytest --cov=run --cov-report html run.py
+$ pytest --cov=run --cov-report html run.py --cov-branch
 $ open htmlcov/index.html
-$ python run.py
 """
