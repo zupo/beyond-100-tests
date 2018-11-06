@@ -3,27 +3,28 @@ def number():
 
 
 # -- HERE BE TESTS -- #
-import unittest
+def test_equal():
+    assert number() == 1
 
 
-class TestCase(unittest.TestCase):
-    def test_equal(self):
-        self.assertEqual(number(), 1)
+def test_not_equal():
+    assert number() != 1
 
-    def test_not_equal(self):
-        self.assertNotEqual(number(), 2)
 
-    def test_less_than(self):
-        self.assertLess(number(), 2)
+def test_less_than():
+    assert number() < 2
 
-    def test_greater_than(self):
-        self.assertGreater(number(), 0)
 
-    def test_contained(self):
-        self.assertIn(number(), [0, 1])
+def test_greater_than():
+    assert number() > 0
 
-    def test_instance(self):
-        self.assertIsInstance(number(), int)
+
+def test_contained():
+    assert number() in [1, 0]
+
+
+def test_instance():
+    assert isinstance(number(), int)
 
 
 """ Scenario:
