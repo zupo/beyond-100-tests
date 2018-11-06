@@ -4,9 +4,9 @@ logger = logging.getLogger(__name__)
 
 
 def process_data():
-    logger.info("Processing started.")
+    logger.warn("Processing started.")
     pass  # hardcore processing action
-    logger.info("Processing finished.")
+    logger.warn("Processing finished.")
 
 
 # -- HERE BE TESTS -- #
