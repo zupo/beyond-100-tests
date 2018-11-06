@@ -1,5 +1,5 @@
 def number():
-    return 1
+    return 2
 
 
 # -- HERE BE TESTS -- #
@@ -28,4 +28,5 @@ class TestCase(unittest.TestCase):
 
 """ Scenario:
 $ pytest run.py
+$ flake8 run.py
 """
