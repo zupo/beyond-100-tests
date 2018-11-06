@@ -1,30 +1,29 @@
-def increment(n):
-    return ++n
+import requests
 
 
-def append_to(element, to=[]):
-    to.append(element)
-    return to
+def YEN_last_month():
+    response = requests.get(
+        "http://data.fixer.io/2018-10-01?symbols=JPY&access_key=SECRET"
+    )
+    first_of_month = response.json()["rates"]["JPY"]
+    response2 = requests.get(
+        "http://data.fixer.io/2018-10-31?symbols=JPY&access_key=SECRET"
+    )
+    last_of_month = response.json()["rates"]["JPY"]
+    return first_of_month, last_of_month
 
 
 # -- HERE BE TESTS -- #
 
-
-def test_increment():
-
-    assert increment(1) == 2
+from unittest import mock
 
 
-def test_append_to():
-    my_list = append_to(12)
-    assert my_list == [12]
-
-    my_other_list = append_to(42)
-    assert my_other_list == [42]
+@mock.patch("run.requests")
+def test_YEN_last_month(mocked_requests):
+    mocked_requests.get.return_value.json.return_value = {"rates": {"JPY": 1.1}}
+    assert YEN_last_month() == (1.1, 1.1)  # Really Bad Test™
 
 
 """ Scenario:
 $ pytest run.py
-$ flake8 run.py
-$ open https://pypi.org/project/flake8-bugbear/
 """
