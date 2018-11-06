@@ -1,42 +1,40 @@
-import requests
+def describe_car(car):
+    if not "wheels" in car.keys():
+        raise Exception("wheels is a required key")
+    if not "doors" in car.keys():
+        raise Exception("doors is a required key")
+    return f"This car has {car['wheels']} wheels and {car['doors']} doors."
 
 
-def YEN_last_month():
-    response = requests.get(
-        "http://data.fixer.io/2018-10-01?symbols=JPY&access_key=SECRET"
-    )
-    first_of_month = response.json()["rates"]["JPY"]
-    response2 = requests.get(
-        "http://data.fixer.io/2018-10-31?symbols=JPY&access_key=SECRET"
-    )
-    last_of_month = response.json()["rates"]["JPY"]
-    return first_of_month, last_of_month
+if __name__ == "__main__":  # pragma: no cover
+    corsa = {"wheels": 4, "doors": 5}
+    print(describe_car("corsa"))
 
 
 # -- HERE BE TESTS -- #
+import pytest
 
-import responses
+
+def test_describe_car():
+    corsa = {"wheels": 4, "doors": 5}
+    assert describe_car(corsa) == "This car has 4 wheels and 5 doors."
 
 
-@responses.activate
-def test_YEN_last_month():
+def test_bad_parameters():
 
-    responses.add(
-        responses.GET,
-        "http://data.fixer.io/2018-10-01?symbols=JPY&access_key=SECRET",
-        json={"rates": {"JPY": 1.1}},
-    )
+    with pytest.raises(Exception) as exc:
+        describe_car({})
 
-    responses.add(
-        responses.GET,
-        "http://data.fixer.io/2018-10-31?symbols=JPY&access_key=SECRET",
-        json={"rates": {"JPY": 1.2}},
-    )
+    assert str(exc.value) == "wheels is a required key"
 
-    assert YEN_last_month() == (1.1, 1.2)
+    with pytest.raises(Exception) as exc:
+        describe_car({"wheels": 4})
+
+    assert str(exc.value) == "doors is a required key"
 
 
 """ Scenario:
-$ pytest run.py
-$ open https://pypi.org/project/responses/
+$ pytest --cov=run --cov-report html --cov-branch run.py
+$ open htmlcov/index.html
+$ python run.py
 """
