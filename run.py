@@ -10,18 +10,21 @@ def process_data():
 
 
 # -- HERE BE TESTS -- #
-from unittest import mock
+from testfixtures import LogCapture
 
 
-@mock.patch("run.logger")
-def test_process_data(mocked_logger):
-    assert process_data() is None
+def test_process_data():
 
-    assert len(mocked_logger.info.mock_calls) == 2
-    assert mocked_logger.info.mock_calls[0] == mock.call("Processing started.")
-    assert mocked_logger.info.mock_calls[1] == mock.call("Processing finished.")
+    with LogCapture() as log:
+        assert process_data() is None
+
+    log.check(
+        ("run", "WARNING", "Processing started."),
+        ("run", "WARNING", "Processing finished."),
+    )
 
 
 """ Scenario:
 $ pytest run.py
+$ open https://pypi.org/project/testfixtures/
 """
