@@ -1,24 +1,27 @@
-import datetime
+import logging
+
+logger = logging.getLogger(__name__)
 
 
-def get_yesterdays_microsecond():
-    return datetime.datetime.now().microsecond - datetime.timedelta(day=1)
-
-
-def get_current_microsecond():
-    return datetime.datetime.now().microsecond
+def process_data():
+    logger.info("Processing started.")
+    pass  # hardcore processing action
+    logger.info("Processing finished.")
 
 
 # -- HERE BE TESTS -- #
-from freezegun import freeze_time
+from unittest import mock
 
 
-@freeze_time("2018-01-01 11:22:33.9999999")
-def test_get_current_microsecond():
-    assert get_current_microsecond() == 999999
+@mock.patch("run.logger")
+def test_process_data(mocked_logger):
+    assert process_data() is None
+
+    assert len(mocked_logger.info.mock_calls) == 2
+    assert mocked_logger.info.mock_calls[0] == mock.call("Processing started.")
+    assert mocked_logger.info.mock_calls[1] == mock.call("Processing finished.")
 
 
 """ Scenario:
 $ pytest run.py
-$ open https://pypi.org/project/freezegun/
 """
