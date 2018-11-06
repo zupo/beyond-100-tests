@@ -1,30 +1,31 @@
-import logging
-
-logger = logging.getLogger(__name__)
-
-
-def process_data():
-    logger.warn("Processing started.")
-    pass  # hardcore processing action
-    logger.warn("Processing finished.")
+def number():
+    return 1
 
 
 # -- HERE BE TESTS -- #
-from testfixtures import LogCapture
+import unittest
 
 
-def test_process_data():
+class TestCase(unittest.TestCase):
+    def test_equal(self):
+        self.assertTrue(number() == 1)
 
-    with LogCapture() as log:
-        assert process_data() is None
+    def test_not_equal(self):
+        self.assertTrue(number() != 2)
 
-    log.check(
-        ("run", "WARNING", "Processing started."),
-        ("run", "WARNING", "Processing finished."),
-    )
+    def test_less_than(self):
+        self.assertTrue(number() < 2)
+
+    def test_greater_than(self):
+        self.assertTrue(number() > 0)
+
+    def test_contained(self):
+        self.assertTrue(number() in [0, 1])
+
+    def test_instance(self):
+        self.assertTrue(isinstance(number(), int))
 
 
 """ Scenario:
 $ pytest run.py
-$ open https://pypi.org/project/testfixtures/
 """
