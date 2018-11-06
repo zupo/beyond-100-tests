@@ -15,15 +15,28 @@ def YEN_last_month():
 
 # -- HERE BE TESTS -- #
 
-from unittest import mock
+import responses
 
 
-@mock.patch("run.requests")
-def test_YEN_last_month(mocked_requests):
-    mocked_requests.get.return_value.json.return_value = {"rates": {"JPY": 1.1}}
-    assert YEN_last_month() == (1.1, 1.1)  # Really Bad Test™
+@responses.activate
+def test_YEN_last_month():
+
+    responses.add(
+        responses.GET,
+        "http://data.fixer.io/2018-10-01?symbols=JPY&access_key=SECRET",
+        json={"rates": {"JPY": 1.1}},
+    )
+
+    responses.add(
+        responses.GET,
+        "http://data.fixer.io/2018-10-31?symbols=JPY&access_key=SECRET",
+        json={"rates": {"JPY": 1.2}},
+    )
+
+    assert YEN_last_month() == (1.1, 1.2)
 
 
 """ Scenario:
 $ pytest run.py
+$ open https://pypi.org/project/responses/
 """
