@@ -1,30 +1,23 @@
-def max_values(list, list2):
-    max = list[0]
-    for x in list:
-        if x > 0:
-            max = x
+# fmt: off
+class ModelFeatureFactoryToolkitFeelsLikeJava(object):
 
-    all_values = list()
-    all_values.append(max)
+    with_a_very_long_parameter = "that is one long text, really"
+    and_another_one = "and a bit shorter text, maybe",
 
-    max = list2[0]
-    for x in list2:
-        if x > 0:
-            max = x
-    all_values.append(max)
-
-    return all_values
+    def some_very_complex_method_here(argument_foo, argument_bar):
+        return (
+            argument_foo ** argument_bar + with_a_very_long_parameter  # noqa
+        ) / and_another_one  # noqa
+# fmt: on
 
 
-# -- HERE BE TESTS -- #
-
-
-def test_max_values():
-    assert max_values([3, 4, 5], [5, 6, 7]) == [5, 7]
+def test_parameters_are_of_equal_length():
+    obj = ModelFeatureFactoryToolkitFeelsLikeJava
+    assert len(obj.with_a_very_long_parameter) == len(obj.and_another_one)
 
 
 """ Scenario:
 $ pytest run.py
 $ flake8 run.py
-$ open https://pypi.org/project/flake8-builtins/
+$ open https://pypi.org/project/flake8_tuple/
 """
