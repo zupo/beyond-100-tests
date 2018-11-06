@@ -10,15 +10,15 @@ def get_current_microsecond():
 
 
 # -- HERE BE TESTS -- #
-from unittest import mock
+from freezegun import freeze_time
 
 
-@mock.patch("run.datetime")
-def test_get_current_microsecond(patched_dt):
-    patched_dt.now.return_value.microsecond = 999
-    assert get_current_microsecond() == 999
+@freeze_time("2018-01-01 11:22:33.9999999")
+def test_get_current_microsecond():
+    assert get_current_microsecond() == 999999
 
 
 """ Scenario:
 $ pytest run.py
+$ open https://pypi.org/project/freezegun/
 """
