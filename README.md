@@ -24,3 +24,8 @@ $ git demo-next
 $ git demo-diff
 $ git demo-prev
 ```
+
+### Inspirations and references
+
+* https://blog.jayway.com/2015/03/30/using-git-commits-to-drive-a-live-coding-session/
+* https://github.com/niteoweb/Makefile/blob/master/Pipfile
