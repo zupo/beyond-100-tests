@@ -1,6 +1,6 @@
 # Beyond 100% test coverage
 
-Code steps for the "Beyond 100% test coverage" talk. Usage:
+Code steps for the [Beyond 100% test coverage](https://www.youtube.com/watch?v=AvqtOwWSTcQ&index=20&t=0s&list=PLGN9BI-OAQkRIdWktlyb8ynaapIHTnkVu) talk. Usage:
 
 ## Prepare
 
