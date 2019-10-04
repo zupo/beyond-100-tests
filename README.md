@@ -18,6 +18,8 @@ $ export PS1="\$(__git_ps1)\$ "
 
 ## Talk
 
+Go through commit history. Each commit's diff is one slide, one lesson.  
+
 ```bash
 $ git demo-start
 $ git demo-next
